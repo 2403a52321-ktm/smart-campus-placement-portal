@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusConnect | Placement & Job Tracking</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">CC</span><div><b>CampusConnect</b><small>Placement Portal</small></div></div>
+    <div class="profile"><div class="avatar">ST</div><div><b id="sideName">Student User</b><small id="sideRole">Student</small></div></div>
+    <nav>
+      <button class="nav-link active" data-page="dashboard">▦ <span>Dashboard</span></button>
+      <button class="nav-link" data-page="jobs">⌕ <span>Job Opportunities</span></button>
+      <button class="nav-link" data-page="applications">▤ <span>My Applications</span></button>
+      <button class="nav-link" data-page="events">▣ <span>Placement Events</span></button>
+      <button class="nav-link" data-page="profile">◎ <span>My Profile</span></button>
+    </nav>
+    <div class="sidebar-bottom"><div class="help-card"><b>Need assistance?</b><p>Contact your placement cell for support.</p><a href="mailto:placement@college.edu">Contact placement cell ↗</a></div><button id="resetData" class="reset-btn">↻ Reset demo data</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">STUDENT WORKSPACE</span><h1 id="pageTitle">Dashboard</h1></div><div class="top-actions"><span class="today" id="today"></span><div class="notify-wrap"><button class="icon-btn" id="notifyBtn" title="Notifications" aria-label="Notifications">♧<i id="notifyDot" hidden></i><span class="notify-count" id="notifyCount" hidden>0</span></button><div class="notify-panel" id="notifyPanel" hidden><div class="notify-head"><b>Notifications</b><span><button class="text-btn" id="markRead">Mark all read</button><button class="text-btn" id="clearNotes">Clear</button></span></div><div id="notifyList" class="notify-list"></div></div></div><div class="top-avatar">ST</div></div></header>
+    <section id="dashboard" class="page active">
+      <div class="welcome"><div><span class="eyebrow light">YOUR CAREER JOURNEY STARTS HERE</span><h2>Welcome back, <span id="welcomeName">Student</span>! 👋</h2><p>Track opportunities, manage applications and stay ready for your next big step.</p></div><div class="welcome-art">✦</div></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon purple">▤</div><span>Applied</span><strong id="statApplied">0</strong><small class="muted">Applications submitted</small></article>
+        <article class="stat-card"><div class="stat-icon blue">◷</div><span>Shortlisted</span><strong id="statShortlisted">0</strong><small class="muted">Moved to next stage</small></article>
+        <article class="stat-card"><div class="stat-icon green">✓</div><span>Selected</span><strong id="statSelected">0</strong><small class="muted">Offers received</small></article>
+        <article class="stat-card"><div class="stat-icon red">×</div><span>Rejected</span><strong id="statRejected">0</strong><small class="muted">Not selected</small></article>
+      </div>
+      <div class="content-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h3>Application overview</h3><p>Applied, shortlisted, selected and rejected applications</p></div><span class="pill">This semester</span></div><canvas id="applicationChart" height="190"></canvas></article>
+        <article class="panel"><div class="panel-heading"><div><h3>Upcoming events</h3><p>Don't miss important dates</p></div><button class="text-btn" data-go="events">View all →</button></div><div id="dashboardEvents" class="event-list"></div></article>
+      </div>
+      <article class="panel"><div class="panel-heading"><div><h3>Recommended opportunities</h3><p>Ranked by how closely job requirements match your profile skills</p></div><button class="text-btn" data-go="jobs">Explore jobs →</button></div><div id="recommendedJobs" class="job-grid"></div></article>
+    </section>
+    <section id="jobs" class="page">
+      <div class="section-intro"><div><h2>Explore opportunities</h2><p>Discover internships and full-time roles from hiring partners.</p></div><span class="pill success">● Live demo listings</span></div>
+      <div class="filterbar"><input id="jobSearch" placeholder="Search company, role or skill..."><select id="jobType"><option value="">All job types</option><option>Full-time</option><option>Internship</option></select><select id="jobLocation"><option value="">All locations</option><option>Hyderabad</option><option>Bengaluru</option><option>Remote</option><option>Chennai</option></select></div>
+      <div id="jobsList" class="job-grid"></div>
+    </section>
+    <section id="applications" class="page">
+      <div class="section-intro"><div><h2>My applications</h2><p>Monitor every stage of your job application journey.</p></div><span class="pill" id="applicationCount">0 applications</span></div>
+      <div class="filterbar"><input id="applicationSearch" placeholder="Search applications..."><select id="statusFilter"><option value="">All statuses</option><option>Applied</option><option>Shortlisted</option><option>Interview</option><option>Selected</option><option>Rejected</option></select></div>
+      <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>COMPANY / ROLE</th><th>APPLIED ON</th><th>JOB TYPE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="applicationRows"></tbody></table></div><div id="emptyApplications" class="empty-state" hidden><div>▤</div><h3>No applications found</h3><p>Apply to an opportunity to see it tracked here.</p><button class="primary-btn" data-go="jobs">Browse jobs</button></div></div>
+    </section>
+    <section id="events" class="page">
+      <div class="section-intro"><div><h2>Placement events</h2><p>Stay informed about drives, workshops and career sessions.</p></div></div><div id="eventsList" class="event-cards"></div>
+    </section>
+    <section id="profile" class="page">
+      <div class="section-intro"><div><h2>Student profile</h2><p>Keep your details up to date for recruiters.</p></div><span class="pill success">Profile workspace</span></div>
+      <form id="profileForm" class="panel profile-form"><div class="form-heading"><div class="avatar large">ST</div><div><h3>Personal & academic details</h3><p>Information used by the placement cell</p></div></div>
+        <div class="form-grid"><label>Full name<input name="name" required placeholder="Your full name"></label><label>Email address<input name="email" type="email" required placeholder="student@college.edu"></label><label>Department<input name="department" placeholder="e.g. Computer Science"></label><label>Graduation year<input name="year" type="number" min="2024" max="2035" placeholder="2027"></label><label>CGPA<input name="cgpa" type="number" min="0" max="10" step=".01" placeholder="8.5"></label><label>Phone number<input name="phone" type="tel" placeholder="Your contact number"></label><label class="full">Skills (comma separated)<input name="skills" placeholder="Python, Java, SQL, Communication"></label><label class="full">Resume link<input name="resume" type="url" placeholder="https://..."></label><label class="full contact-heading">Notify a known person when I am selected or rejected <small>(optional – parent, friend, mentor)</small></label><label>Contact name<input name="contactName" placeholder="e.g. Mom / Rahul"></label><label>Contact email<input name="contactEmail" type="email" placeholder="person@example.com"></label></div><button class="primary-btn" type="submit">Save profile</button><span id="profileMessage" class="form-message"></span></form>
+    </section>
+    <footer>© 2026 CampusConnect · Smart Campus Placement & Job Tracking Portal <span>Built for academic demonstration</span></footer>
+  </main>
+  <div class="toast" id="toast"></div>
+  <div class="modal-backdrop" id="jobModal"><div class="modal"><button class="close-modal" id="closeModal">×</button><div id="modalContent"></div></div></div>
+  <script src="script.js"></script>
+</body></html>
